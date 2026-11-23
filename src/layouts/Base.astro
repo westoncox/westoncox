@@ -1,0 +1,57 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/space-grotesk";
+import "../styles/global.css";
+import { SITE } from "../site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.person}` : `${SITE.person} | Graphic Designer`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="color-scheme" content="light dark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.legalName} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/">
+        {SITE.person}
+      </a>
+      <nav aria-label="Main">
+        <a href="/#work">work</a>
+        <a href="/projects/">projects</a>
+        <a href="/#contact">contact</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>
+        &copy; {year} {SITE.legalName} · {SITE.location}
+      </p>
+      <p>
+        <a href="/privacy/">Privacy</a>
+      </p>
+    </footer>
+  </body>
+</html>

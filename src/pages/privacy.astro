@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site";
+---
+
+<Base title="Privacy" description={`Privacy policy for ${SITE.legalName} and westoncox.com.`}>
+  <section class="prose policy">
+    <h1>Privacy</h1>
+    <p>
+      <em>Last updated November 2026.</em>
+    </p>
+    <p>
+      This website does not use cookies, analytics, or tracking scripts, and it does not collect personal information.
+      The site is hosted on GitHub Pages, which may keep standard server logs (such as IP addresses) for security.
+    </p>
+    <p>
+      Details:
+      <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
+        GitHub's privacy statement
+      </a>
+    </p>
+    <p>If you email or call {SITE.legalName}, your message is used only to reply to you and is never sold or shared.</p>
+    <p>
+      Individual apps, Shortcuts, and tools published here may describe additional details on their own project pages.
+    </p>
+    <p>
+      Questions: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .policy {
+    margin-top: clamp(2rem, 6vw, 4rem);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 0 0 1rem;
+  }
+</style>

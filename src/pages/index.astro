@@ -1,0 +1,112 @@
+---
+import Base from "../layouts/Base.astro";
+import Gallery from "../components/Gallery.astro";
+import { SITE } from "../site";
+
+// DRAFT copy, awaiting the owner's approval.
+const services = [
+  "Brand identity and logos",
+  "Print: catalogs, ads, packaging, labels, signage",
+  "Product, event, and portrait photography",
+  "Small software tools: web apps, iOS Shortcuts, scripts, creative-app plugins",
+];
+---
+
+<Base>
+  <section class="hero">
+    <p class="eyebrow">{SITE.tagline}</p>
+    <h1>Graphic designer &amp; photographer.</h1>
+    <p class="prose lede">
+      I'm Weston Cox, a designer and photographer based in {SITE.location}. For decades I've helped businesses look like
+      themselves in print, on screen, and on the shelf. Through {SITE.legalName} I also build small, practical software
+      tools.
+    </p>
+  </section>
+
+  <section id="work" aria-labelledby="work-title">
+    <h2 id="work-title" class="section-title">
+      Selected work
+    </h2>
+    <Gallery />
+  </section>
+
+  <section id="services" aria-labelledby="services-title">
+    <h2 id="services-title" class="section-title">
+      What I do
+    </h2>
+    <ul class="services prose">
+      {services.map((s) => (
+        <li>{s}</li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title" class="section-title">
+      Contact
+    </h2>
+    <address class="contact">
+      <strong>{SITE.legalName}</strong>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      <a href={SITE.phoneHref}>{SITE.phone}</a>
+      <span>{SITE.location}</span>
+    </address>
+    <ul class="social">
+      {SITE.social.map((s) => (
+        <li>
+          <a href={s.href} rel="me">
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  section {
+    margin-top: clamp(3rem, 8vw, 6rem);
+  }
+
+  .hero {
+    margin-top: clamp(2rem, 8vw, 6rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    margin: 0 0 1.5rem;
+    max-width: 14ch;
+  }
+
+  .lede {
+    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .services {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+
+  .services li + li {
+    margin-top: 0.4rem;
+  }
+
+  .contact {
+    font-style: normal;
+    display: grid;
+    gap: 0.35rem;
+    font-size: 1.15rem;
+  }
+
+  .social {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    color: var(--muted);
+  }
+</style>

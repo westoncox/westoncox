@@ -1,0 +1,25 @@
+# Dependencies / build output
+node_modules/
+dist/
+.astro/
+
+# OS / editor
+.DS_Store
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Claude Code — personal/machine-local scope (shared config IS committed)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Raw material for agents to digest (personal; never published)
+inbox/
+
+# Logs
+*.log
+npm-debug.log*

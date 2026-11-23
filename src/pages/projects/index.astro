@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base
+  title="Projects"
+  description="Software projects from Weston Cox Design LLC: web apps, iOS Shortcuts, scripts, and plugins."
+>
+  <section class="intro">
+    <h1>Projects</h1>
+    <p class="prose">Web apps, iOS Shortcuts, scripts, and creative-app plugins built by Weston Cox Design LLC.</p>
+  </section>
+  <section>
+    {projects.length === 0 ? (
+      <p class="empty">The first public projects are coming soon.</p>
+    ) : (
+      <ul class="list">
+        {projects.map((p) => (
+          <li>
+            <h2>{p.data.url ? <a href={p.data.url}>{p.data.title}</a> : p.data.title}</h2>
+            <p class="kind">{p.data.kind}</p>
+            <p>{p.data.summary}</p>
+            {p.data.repo && <a href={p.data.repo}>Source</a>}
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Base>
+
+<style>
+  .intro {
+    margin-top: clamp(2rem, 6vw, 4rem);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 0 0 1rem;
+  }
+
+  .empty,
+  .kind {
+    color: var(--muted);
+  }
+
+  .list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .list h2 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+
+  .list p {
+    margin: 0.25rem 0;
+  }
+</style>

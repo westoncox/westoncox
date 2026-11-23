@@ -1,0 +1,137 @@
+:root {
+  --bg: #fbfaf7;
+  --fg: #1b1b1a;
+  --muted: #6b6a66;
+  --line: #e3e1db;
+  --accent: #c2410c;
+  --font-display: "Space Grotesk Variable", system-ui, sans-serif;
+  --font-body: "Inter Variable", system-ui, sans-serif;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --measure: 38rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121211;
+    --fg: #edebe6;
+    --muted: #a19f99;
+    --line: #2a2927;
+    --accent: #fb923c;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 1.0625rem/1.6 var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.site-header,
+.site-footer,
+main > section {
+  padding-inline: var(--gutter);
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: 1.5rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-header nav a {
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.site-header nav a:hover {
+  color: var(--fg);
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 6rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem;
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 0 0 1.5rem;
+}
