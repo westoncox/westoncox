@@ -1,9 +1,12 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import Gallery from "../../components/Gallery.astro";
 
-const projects = (await getCollection("projects", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+const projects = await Promise.all(
+  (await getCollection("projects", ({ data }) => !data.draft))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .map(async (p) => ({ ...p, Content: (await render(p)).Content })),
 );
 ---
 
@@ -25,6 +28,12 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft)).so
             <h2>{p.data.url ? <a href={p.data.url}>{p.data.title}</a> : p.data.title}</h2>
             <p class="kind">{p.data.kind}</p>
             <p>{p.data.summary}</p>
+            <div class="prose body">
+              <p.Content />
+            </div>
+            {p.data.screenshots.length > 0 && (
+              <Gallery images={p.data.screenshots} label={`${p.data.title} screenshots`} />
+            )}
             {p.data.repo && <a href={p.data.repo}>Source</a>}
           </li>
         ))}
@@ -62,5 +71,9 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft)).so
 
   .list p {
     margin: 0.25rem 0;
+  }
+
+  .body {
+    margin: 1rem 0 1.5rem;
   }
 </style>

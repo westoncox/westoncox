@@ -4,27 +4,32 @@
 
 ## Current focus
 
-westoncox.com v1 is live (custom domain, HTTPS enforced). Adding the portfolio.
+westoncox.com v1 is live (custom domain, HTTPS enforced). Adding projects (CLC Photos) and the real favicon.
 
 ## State
 
 - 28 portfolio images are in `src/assets/work/`, from the owner's Squarespace export. They were resized to a
   2000px long edge, converted to sRGB (one was CMYK) and named for their alt text. `npm run check` passes.
 - One image (a child's portrait) was held back for the owner to decide on.
-- **Draft copy needs the owner's approval:** the intro paragraph and the services list in `src/pages/index.astro`.
+- Intro and services copy in `src/pages/index.astro` were edited by the owner.
+- `/projects` features CLC Photos (`src/content/projects/clcphotos.md`). Admin screenshots pending: demo data only,
+  no customer or student names, no admin URL visible. Project pages never link to admin areas.
+- Favicon is the old multicolor "wc" logo (`public/favicon.ico`, `icon-512.png`, `apple-touch-icon.png`).
 
 ## Next steps
 
-- Owner: approve or edit the draft copy.
+- Owner: supply CLC admin screenshots; review the CLC Photos text.
 - Owner: check the order and alt-text names of the work images (rename files to reorder).
-- Replace the placeholder favicon with the real "wc" logo; add an OG image.
+- Add an OG image (the logo or a work collage).
 
 ## Pending commit
 
-    Summary: Add portfolio images to the work gallery
+    Summary: Feature CLC Photos; use the wc logo favicon
     Description:
-    - 28 pieces from the old Squarespace site, resized to 2000px, sRGB
-    - File names set the order and the alt text
+    - Update intro and services copy
+    - Projects render their Markdown body and optional screenshots
+    - Gallery takes an images prop; each gallery has its own lightbox
+    - Replace the placeholder favicon with the original multicolor logo
 
 ## Gotchas
 

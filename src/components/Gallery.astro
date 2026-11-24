@@ -2,13 +2,19 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
+interface Props {
+  // Defaults to the portfolio in src/assets/work/.
+  images?: { src: ImageMetadata; alt: string }[];
+  label?: string;
+}
+
 // Drop portfolio images into src/assets/work/; files sort by name, so prefix
 // them (01-, 02-, …) to set the order. The alt text comes from the file name.
 const files = import.meta.glob<{ default: ImageMetadata }>("../assets/work/*.{jpg,jpeg,png,webp,avif}", {
   eager: true,
 });
 
-const images = Object.entries(files)
+const portfolio = Object.entries(files)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([path, mod]) => {
     const name = path
@@ -21,8 +27,11 @@ const images = Object.entries(files)
       .trim();
     return { src: mod.default, alt };
   });
+
+const { images = portfolio, label = "Portfolio viewer" } = Astro.props;
 ---
 
+<div class="gallery">
 {images.length === 0 ? (
   <p class="empty">Portfolio images are on their way.</p>
 ) : (
@@ -44,7 +53,7 @@ const images = Object.entries(files)
 )}
 
 {images.length > 0 && (
-  <dialog class="lightbox" aria-label="Portfolio viewer">
+  <dialog class="lightbox" aria-label={label}>
     <button type="button" class="close" aria-label="Close">
       ×
     </button>
@@ -64,17 +73,20 @@ const images = Object.entries(files)
     </button>
   </dialog>
 )}
+</div>
 
 <script>
-  const dialog = document.querySelector<HTMLDialogElement>(".lightbox");
-  if (dialog) {
+  // Each gallery gets its own lightbox, so a page can hold several.
+  for (const gallery of document.querySelectorAll<HTMLElement>(".gallery")) {
+    const dialog = gallery.querySelector<HTMLDialogElement>(".lightbox");
+    if (!dialog) continue;
     const frames = [...dialog.querySelectorAll<HTMLElement>("figure")];
     let current = 0;
     const show = (i: number) => {
       current = (i + frames.length) % frames.length;
       frames.forEach((f, n) => (f.hidden = n !== current));
     };
-    document.querySelectorAll<HTMLButtonElement>(".thumb").forEach((btn) =>
+    gallery.querySelectorAll<HTMLButtonElement>(".thumb").forEach((btn) =>
       btn.addEventListener("click", () => {
         show(Number(btn.dataset.index));
         dialog.showModal();
