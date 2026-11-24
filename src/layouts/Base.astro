@@ -2,7 +2,9 @@
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
 import "../styles/global.css";
+import { Image } from "astro:assets";
 import { SITE } from "../site";
+import logo from "../assets/logo-wc.png";
 
 interface Props {
   title?: string;
@@ -36,6 +38,7 @@ const year = new Date().getFullYear();
   <body>
     <header class="site-header">
       <a class="wordmark" href="/">
+        <Image src={logo} alt="" width={36} height={36} densities={[1, 2, 3]} loading="eager" />
         {SITE.person}
       </a>
       <nav aria-label="Main">

@@ -77,11 +77,14 @@ main > section {
   flex-wrap: wrap;
   gap: 0.5rem 2rem;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   padding-block: 1.5rem;
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.25rem;

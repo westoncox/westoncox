@@ -14,7 +14,7 @@ westoncox.com v1 is live (custom domain, HTTPS enforced). Adding projects (CLC P
 - Intro and services copy in `src/pages/index.astro` were edited by the owner.
 - `/projects` features CLC Photos (`src/content/projects/clcphotos.md`). Admin screenshots pending: demo data only,
   no customer or student names, no admin URL visible. Project pages never link to admin areas.
-- Favicon is the old multicolor "wc" logo (`public/favicon.ico`, `icon-512.png`, `apple-touch-icon.png`).
+- The multicolor "wc" logo is the favicon (`public/`) and sits beside the wordmark in the header (`src/assets/logo-wc.png`).
 
 ## Next steps
 
@@ -24,12 +24,7 @@ westoncox.com v1 is live (custom domain, HTTPS enforced). Adding projects (CLC P
 
 ## Pending commit
 
-    Summary: Feature CLC Photos; use the wc logo favicon
-    Description:
-    - Update intro and services copy
-    - Projects render their Markdown body and optional screenshots
-    - Gallery takes an images prop; each gallery has its own lightbox
-    - Replace the placeholder favicon with the original multicolor logo
+    Summary: Add the wc logo to the site header
 
 ## Gotchas
 
